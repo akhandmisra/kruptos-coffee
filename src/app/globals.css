@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #12100d;
+  --color-ink-raised: #1c1812;
+  --color-bone: #ede6d6;
+  --color-bone-dim: #b8ae98;
+  --color-crema: #c9a227;
+  --color-rust: #b4472b;
+  --color-moss: #5c6b4f;
+  --color-slate: #6e7681;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-ink-raised: var(--color-ink-raised);
+  --color-bone: var(--color-bone);
+  --color-bone-dim: var(--color-bone-dim);
+  --color-crema: var(--color-crema);
+  --color-rust: var(--color-rust);
+  --color-moss: var(--color-moss);
+  --color-slate: var(--color-slate);
+
+  --font-display: "Bebas Neue", sans-serif;
+  --font-sans: "Public Sans", sans-serif;
+  --font-mono: "Space Mono", monospace;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-bone);
+}
+
+::selection {
+  background: var(--color-crema);
+  color: var(--color-ink);
+}
+
+/* Fine grain-paper texture, kept subtle so it reads as "pressed" not "noisy" */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-in {
+    animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
