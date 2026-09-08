@@ -42,6 +42,7 @@ export default async function ProductPage({
             title={product.title}
             accent={product.accent}
             category={product.category}
+            image={product.image}
           />
         </div>
 
