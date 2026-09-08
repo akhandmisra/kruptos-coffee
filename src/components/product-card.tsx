@@ -10,6 +10,7 @@ export function ProductCard({ product }: { product: Product }) {
         title={product.title}
         accent={product.accent}
         category={product.category}
+        image={product.image}
       />
       <div className="mt-4 flex items-start justify-between gap-3">
         <div>
