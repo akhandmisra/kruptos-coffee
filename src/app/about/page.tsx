@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const metadata = { title: "Our Story — Kruptos Coffee Roasters" };
 
 const SECTIONS = [
@@ -52,6 +54,17 @@ export default function AboutPage() {
         Our Story
       </h1>
 
+      <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-sm border border-bone/10 bg-ink-raised">
+        <Image
+          src="/images/estate-banner.jpg"
+          alt="Coffee estate in Bastar, Chhattisgarh, where Kruptos grows and processes coffee"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+      </div>
+
       <div className="mt-14 space-y-14">
         {SECTIONS.map((section) => (
           <section key={section.title}>
@@ -66,6 +79,16 @@ export default function AboutPage() {
                 <p key={i}>{paragraph}</p>
               ))}
             </div>
+            {section.eyebrow === "03 — Home Ground" && (
+              <div className="relative mt-6 aspect-[16/9] w-full overflow-hidden rounded-sm border border-bone/10 bg-ink-raised">
+                <Image
+                  src="/images/estate-processing.jpg"
+                  alt="Coffee processing at the Kruptos estate — drying beds and fermentation"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
           </section>
         ))}
       </div>
