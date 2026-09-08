@@ -46,8 +46,7 @@ export async function shopifyFetch<T>({
 
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`Shopify Storefront API error (${res.status}): ${text}`);
-  }
+      throw new Error(`Shopify Storefront API error (${res.status}): ${text} [debug] domain="${domain}" tokenLength=${token?.length ?? 0} tokenStart="${token?.slice(0, 6)}"`);
 
   const json = await res.json();
 
