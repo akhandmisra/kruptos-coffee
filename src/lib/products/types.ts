@@ -31,8 +31,10 @@ export type Product = {
     roast: string;
     notes: string; // tasting notes
   };
-  /** Hex accent used for the "sleeve" art since we don't have product photography yet */
+  /** Hex accent used for the "sleeve" art when there's no real product photo yet */
   accent: string;
+  /** Real product photo from Shopify, when one has been uploaded */
+  image: { url: string; alt: string } | null;
   category: "coffee" | "merch";
   priceRange: { minVariantPrice: Money; maxVariantPrice: Money };
   options: ProductOption[];
