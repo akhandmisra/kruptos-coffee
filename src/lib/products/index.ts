@@ -18,6 +18,7 @@ type ShopifyProductNode = {
   description: string;
   tags: string[];
   priceRange: Product["priceRange"];
+  featuredImage: { url: string; altText: string | null } | null;
   options: { name: string; values: string[] }[];
   variants: { nodes: Product["variants"] };
 };
@@ -36,6 +37,9 @@ function mapShopifyProduct(node: ShopifyProductNode): Product {
       notes: node.tags.find((t) => t.startsWith("notes:"))?.split(":")[1] ?? "—",
     },
     accent: accentFor(node.handle),
+    image: node.featuredImage
+      ? { url: node.featuredImage.url, alt: node.featuredImage.altText ?? node.title }
+      : null,
     category: node.tags.includes("merch") ? "merch" : "coffee",
     priceRange: node.priceRange,
     options: node.options,
