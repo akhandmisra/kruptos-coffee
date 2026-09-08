@@ -10,7 +10,21 @@ export default async function HomePage() {
     <div>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-bone/10">
-        <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
+        <div className="absolute inset-0 z-0">
+          <video
+            className="h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/images/estate-poster.jpg"
+          >
+            <source src="/videos/estate.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-ink/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
           <p className="animate-in font-mono text-xs uppercase tracking-[0.3em] text-crema">
             Chhattisgarh&apos;s First Specialty Roastery
           </p>
@@ -30,7 +44,7 @@ export default async function HomePage() {
           >
             Every Kruptos roast ships with a QR code straight to the playlist
             we roasted it to. Micro-lots sourced direct from planters across
-            India and beyond, fully traceable, hand-processed, Roasted in small batches.
+            India and beyond, fully traceable, hand-processed, hand-roasted.
           </p>
           <div
             className="animate-in mt-8 flex flex-wrap gap-4"
