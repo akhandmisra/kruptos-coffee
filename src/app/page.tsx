@@ -29,8 +29,8 @@ export default async function HomePage() {
             style={{ animationDelay: "160ms" }}
           >
             Every Kruptos roast ships with a QR code straight to the playlist
-            we roasted it to. Small batches, sourced direct from
-            Chikkamagaluru and Koraput, roasted by hand.
+            we roasted it to. Micro-lots sourced direct from planters across
+            India and beyond, fully traceable, hand-processed, Roasted in small batches.
           </p>
           <div
             className="animate-in mt-8 flex flex-wrap gap-4"
