@@ -61,9 +61,18 @@ export function AddToCart({ product }: { product: Product }) {
 
       <div className="flex items-center gap-4 pt-2">
         <span className="font-mono text-xl text-bone">
-          {variant
-            ? formatMoney(variant.price.amount, variant.price.currencyCode)
-            : "—"}
+          {variant ? (
+            <>
+              {formatMoney(variant.price.amount, variant.price.currencyCode)}
+              {variant.rentalPeriod && (
+                <span className="text-sm text-bone-dim">
+                  /{variant.rentalPeriod}
+                </span>
+              )}
+            </>
+          ) : (
+            "—"
+          )}
         </span>
         <button
           onClick={handleAdd}
@@ -77,6 +86,13 @@ export function AddToCart({ product }: { product: Product }) {
             : "Add to crate"}
         </button>
       </div>
+      {variant?.rentalDeposit && (
+        <p className="font-mono text-xs text-bone-dim">
+          + {formatMoney(variant.rentalDeposit.amount, variant.rentalDeposit.currencyCode)}{" "}
+          refundable deposit, collected at pickup and returned when the
+          equipment comes back in working order.
+        </p>
+      )}
     </div>
   );
 }

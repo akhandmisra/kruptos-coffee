@@ -14,11 +14,14 @@ export default async function ShopPage({
       ? products.filter((p) => p.category === "merch")
       : category === "coffee"
       ? products.filter((p) => p.category === "coffee")
+      : category === "equipment"
+      ? products.filter((p) => p.category === "equipment")
       : products;
 
   const tabs = [
     { label: "All", value: undefined },
     { label: "Coffee", value: "coffee" },
+    { label: "Equipment", value: "equipment" },
     { label: "Merch", value: "merch" },
   ];
 

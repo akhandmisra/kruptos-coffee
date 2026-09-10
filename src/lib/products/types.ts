@@ -9,6 +9,16 @@ export type ProductVariant = {
   price: Money;
   availableForSale: boolean;
   selectedOptions: { name: string; value: string }[];
+  /**
+   * Set on "Rent" variants only. In demo mode this drives the deposit note
+   * on the product page and cart. In live mode, a Shopify Storefront
+   * variant doesn't have a native "deposit" concept — carry it over via a
+   * variant metafield and map it in `src/lib/products/index.ts` when this
+   * store goes live with rentable equipment.
+   */
+  rentalDeposit?: Money;
+  /** Billing period for a "Rent" variant's price. Defaults to "month" when a rentalDeposit is present but this isn't set. */
+  rentalPeriod?: "week" | "month";
 };
 
 export type ProductOption = {
@@ -31,9 +41,11 @@ export type Product = {
     roast: string;
     notes: string; // tasting notes
   };
-  /** Hex accent used for the "sleeve" art since we don't have product photography yet */
+  /** Hex accent used for the "sleeve" art when there's no real product photo yet */
   accent: string;
-  category: "coffee" | "merch";
+  /** Real product photo from Shopify, when one has been uploaded */
+  image: { url: string; alt: string } | null;
+  category: "coffee" | "merch" | "equipment";
   priceRange: { minVariantPrice: Money; maxVariantPrice: Money };
   options: ProductOption[];
   variants: ProductVariant[];
@@ -48,4 +60,7 @@ export type CartLine = {
   price: Money;
   accent: string;
   quantity: number;
+  /** Carried over from the variant when it's a rental — see ProductVariant. */
+  rentalDeposit?: Money;
+  rentalPeriod?: "week" | "month";
 };

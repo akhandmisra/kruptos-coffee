@@ -23,6 +23,7 @@ type CartContextValue = {
   isOpen: boolean;
   isLoading: boolean;
   subtotal: number;
+  depositTotal: number;
   currencyCode: string;
   itemCount: number;
   openCart: () => void;
@@ -139,6 +140,8 @@ export function CartProvider({
                     price: variant.price,
                     accent: product.accent,
                     quantity: 1,
+                    rentalDeposit: variant.rentalDeposit,
+                    rentalPeriod: variant.rentalPeriod,
                   },
                 ];
             return { ...prev, id: "demo", lines };
@@ -229,6 +232,17 @@ export function CartProvider({
     [cart.lines]
   );
 
+  const depositTotal = useMemo(
+    () =>
+      cart.lines.reduce(
+        (sum, line) =>
+          sum +
+          (line.rentalDeposit ? Number(line.rentalDeposit.amount) * line.quantity : 0),
+        0
+      ),
+    [cart.lines]
+  );
+
   const itemCount = useMemo(
     () => cart.lines.reduce((sum, line) => sum + line.quantity, 0),
     [cart.lines]
@@ -242,6 +256,7 @@ export function CartProvider({
     isOpen,
     isLoading,
     subtotal,
+    depositTotal,
     currencyCode,
     itemCount,
     openCart: () => setIsOpen(true),

@@ -35,6 +35,34 @@ const coffeeOptions = [
   { name: "Weight", values: ["250g", "500g"] },
 ];
 
+const equipmentOptions = [{ name: "Type", values: ["Buy", "Rent"] }];
+
+function equipmentVariants(
+  handle: string,
+  buyPrice: string,
+  rentPricePerMonth: string,
+  depositAmount: string
+): Product["variants"] {
+  return [
+    {
+      id: `${handle}-buy`,
+      title: "Buy",
+      price: inr(buyPrice),
+      availableForSale: true,
+      selectedOptions: [{ name: "Type", value: "Buy" }],
+    },
+    {
+      id: `${handle}-rent`,
+      title: "Rent",
+      price: inr(rentPricePerMonth),
+      availableForSale: true,
+      selectedOptions: [{ name: "Type", value: "Rent" }],
+      rentalDeposit: inr(depositAmount),
+      rentalPeriod: "month",
+    },
+  ];
+}
+
 function priceRange(variants: Product["variants"]) {
   const amounts = variants.map((v) => Number(v.price.amount));
   return {
@@ -58,6 +86,7 @@ const coffees: Product[] = [
       notes: "Dark chocolate, roasted almond, brown sugar",
     },
     accent: "#B4472B",
+    image: null,
     category: "coffee",
     variants: coffeeVariants("dark-side", "525", "950"),
     options: coffeeOptions,
@@ -77,6 +106,7 @@ const coffees: Product[] = [
       notes: "Red berry, wine-like acidity, jaggery",
     },
     accent: "#5C6B4F",
+    image: null,
     category: "coffee",
     variants: coffeeVariants("bitch-bloom", "595", "1100"),
     options: coffeeOptions,
@@ -96,6 +126,7 @@ const coffees: Product[] = [
       notes: "Stone fruit, caramel, low acidity",
     },
     accent: "#C9A227",
+    image: null,
     category: "coffee",
     variants: coffeeVariants("simple-men", "550", "1000"),
     options: coffeeOptions,
@@ -115,6 +146,7 @@ const coffees: Product[] = [
       notes: "White grape, honey, citrus zest",
     },
     accent: "#8A6FB0",
+    image: null,
     category: "coffee",
     variants: coffeeVariants("loveless", "560", "1020"),
     options: coffeeOptions,
@@ -134,6 +166,7 @@ const coffees: Product[] = [
       notes: "Molasses, roasted cocoa, black pepper",
     },
     accent: "#1F1B18",
+    image: null,
     category: "coffee",
     variants: coffeeVariants("disintegration", "525", "950"),
     options: coffeeOptions,
@@ -153,6 +186,7 @@ const coffees: Product[] = [
       notes: "Mango, tamarind, dark honey",
     },
     accent: "#D98C3C",
+    image: null,
     category: "coffee",
     variants: coffeeVariants("in-rainbows", "595", "1100"),
     options: coffeeOptions,
@@ -175,6 +209,7 @@ const merch: Product[] = [
       notes: "One of each: dark, light, fermented",
     },
     accent: "#C9A227",
+    image: null,
     category: "merch",
     options: [{ name: "Set", values: ["Standard"] }],
     variants: [
@@ -205,6 +240,7 @@ const merch: Product[] = [
       notes: "300ml, matte black glaze",
     },
     accent: "#6E7681",
+    image: null,
     category: "merch",
     options: [{ name: "Style", values: ["Matte Black"] }],
     variants: [
@@ -235,6 +271,7 @@ const merch: Product[] = [
       notes: "100% cotton canvas",
     },
     accent: "#EDE6D6",
+    image: null,
     category: "merch",
     options: [{ name: "Style", values: ["Natural Canvas"] }],
     variants: [
@@ -253,7 +290,110 @@ const merch: Product[] = [
   },
 ];
 
-export const demoProducts: Product[] = [...coffees, ...merch];
+const equipment: Product[] = [
+  {
+    id: "10",
+    handle: "v60-ceramic-dripper",
+    title: "V60 Ceramic Dripper",
+    tagline: "The pour-over standard, no notes",
+    description:
+      "A glazed ceramic V60, size 02 — the dripper every filter recipe on the internet is written for. Retains heat better than plastic, and it'll outlast the coffee habit that made you buy it.\n\nComes with a starter pack of paper filters.",
+    specs: {
+      origin: "Glazed ceramic",
+      process: "Pour-over, size 02 filters",
+      roast: "1–2 cups",
+      notes: "Hand wash; dishwasher-safe on the top rack",
+    },
+    accent: "#9C6B3F",
+    image: null,
+    category: "equipment",
+    options: equipmentOptions,
+    variants: equipmentVariants("v60-ceramic-dripper", "1200", "150", "500"),
+    priceRange: priceRange(equipmentVariants("v60-ceramic-dripper", "1200", "150", "500")),
+  },
+  {
+    id: "11",
+    handle: "aeropress",
+    title: "AeroPress",
+    tagline: "One brewer, every method, no bitterness",
+    description:
+      "Immersion brewing with a paper-filter finish — clean cup, forgiving technique, packs down small enough to travel. Works standard or inverted.\n\nGood as a first brewer for someone who's never owned one.",
+    specs: {
+      origin: "BPA-free polypropylene",
+      process: "Immersion & inverted method",
+      roast: "1 cup (up to 3 with a bypass)",
+      notes: "Rinse the cap and seal after every use",
+    },
+    accent: "#3E6259",
+    image: null,
+    category: "equipment",
+    options: equipmentOptions,
+    variants: equipmentVariants("aeropress", "3200", "350", "1500"),
+    priceRange: priceRange(equipmentVariants("aeropress", "3200", "350", "1500")),
+  },
+  {
+    id: "12",
+    handle: "french-press",
+    title: "French Press",
+    tagline: "Full immersion, full body, zero setup",
+    description:
+      "Borosilicate glass carafe with a stainless mesh plunger. The most forgiving way to brew — steep, press, pour. No filters to run out of.\n\n600ml, good for two full cups or one very committed one.",
+    specs: {
+      origin: "Borosilicate glass, stainless mesh",
+      process: "Full immersion",
+      roast: "600ml / 4 cups",
+      notes: "Hand wash recommended",
+    },
+    accent: "#4B5563",
+    image: null,
+    category: "equipment",
+    options: equipmentOptions,
+    variants: equipmentVariants("french-press", "1800", "200", "700"),
+    priceRange: priceRange(equipmentVariants("french-press", "1800", "200", "700")),
+  },
+  {
+    id: "13",
+    handle: "digital-coffee-scale",
+    title: "Digital Coffee Scale",
+    tagline: "Because eyeballing a ratio is a personality flaw",
+    description:
+      "0.1g precision with a built-in timer, for anyone dialling in a recipe rather than guessing at it. Works under any brewer — V60, AeroPress, French press, espresso.\n\nAuto-off, USB rechargeable.",
+    specs: {
+      origin: "ABS body, stainless steel plate",
+      process: "Any brew method — 0.1g precision, built-in timer",
+      roast: "Up to 2kg",
+      notes: "Wipe clean, keep dry",
+    },
+    accent: "#2B2B2B",
+    image: null,
+    category: "equipment",
+    options: equipmentOptions,
+    variants: equipmentVariants("digital-coffee-scale", "2500", "300", "1000"),
+    priceRange: priceRange(equipmentVariants("digital-coffee-scale", "2500", "300", "1000")),
+  },
+  {
+    id: "14",
+    handle: "hand-grinder",
+    title: "Hand Grinder",
+    tagline: "Ceramic burrs, 40 clicks, no excuses",
+    description:
+      "A stainless-body hand grinder with ceramic burrs and 40 click-stop settings, from espresso-fine to French-press-coarse. Quiet, portable, no motor to burn out.\n\nThe single biggest upgrade for anyone still buying pre-ground.",
+    specs: {
+      origin: "Stainless steel body, ceramic burrs",
+      process: "Espresso to French press — 40 click settings",
+      roast: "25g bean hopper",
+      notes: "Brush the burrs weekly",
+    },
+    accent: "#8C7A5C",
+    image: null,
+    category: "equipment",
+    options: equipmentOptions,
+    variants: equipmentVariants("hand-grinder", "4500", "500", "2000"),
+    priceRange: priceRange(equipmentVariants("hand-grinder", "4500", "500", "2000")),
+  },
+];
+
+export const demoProducts: Product[] = [...coffees, ...merch, ...equipment];
 
 export function getDemoProduct(handle: string): Product | undefined {
   return demoProducts.find((p) => p.handle === handle);

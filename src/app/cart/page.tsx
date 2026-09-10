@@ -9,6 +9,7 @@ export default function CartPage() {
   const {
     lines,
     subtotal,
+    depositTotal,
     currencyCode,
     updateQuantity,
     removeItem,
@@ -70,8 +71,21 @@ export default function CartPage() {
                         Number(line.price.amount) * line.quantity,
                         line.price.currencyCode
                       )}
+                      {line.rentalPeriod && (
+                        <span className="text-bone-dim">/{line.rentalPeriod}</span>
+                      )}
                     </span>
                   </div>
+                  {line.rentalDeposit && (
+                    <p className="mt-1 font-mono text-[11px] text-bone-dim">
+                      +{" "}
+                      {formatMoney(
+                        Number(line.rentalDeposit.amount) * line.quantity,
+                        line.rentalDeposit.currencyCode
+                      )}{" "}
+                      refundable deposit
+                    </p>
+                  )}
                   <div className="mt-3 flex items-center gap-3">
                     <div className="flex items-center rounded-full border border-bone/20">
                       <button
@@ -115,11 +129,21 @@ export default function CartPage() {
                 setup.
               </p>
             )}
-            <div className="mb-4 flex items-center justify-between font-sans text-sm">
-              <span className="text-bone-dim">Subtotal</span>
-              <span className="font-mono text-base text-bone">
-                {formatMoney(subtotal, currencyCode)}
-              </span>
+            <div className="mb-4 space-y-1">
+              <div className="flex items-center justify-between font-sans text-sm">
+                <span className="text-bone-dim">Subtotal</span>
+                <span className="font-mono text-base text-bone">
+                  {formatMoney(subtotal, currencyCode)}
+                </span>
+              </div>
+              {depositTotal > 0 && (
+                <div className="flex items-center justify-between font-sans text-xs">
+                  <span className="text-bone-dim">Refundable deposits</span>
+                  <span className="font-mono text-bone-dim">
+                    {formatMoney(depositTotal, currencyCode)}
+                  </span>
+                </div>
+              )}
             </div>
             <button
               onClick={handleCheckout}

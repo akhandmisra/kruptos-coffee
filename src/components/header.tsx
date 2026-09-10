@@ -5,6 +5,7 @@ import { useCart } from "@/context/cart-context";
 
 const NAV_LINKS = [
   { href: "/shop", label: "Shop" },
+  { href: "/shop?category=equipment", label: "Equipment" },
   { href: "/about", label: "The Genesis" },
   { href: "/contact", label: "Contact" },
 ];

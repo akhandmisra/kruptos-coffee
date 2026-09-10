@@ -26,6 +26,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/shop?category=equipment" className="hover:text-bone">
+                  Equipment &amp; Tools
+                </Link>
+              </li>
+              <li>
                 <Link href="/shop?category=merch" className="hover:text-bone">
                   Merch
                 </Link>

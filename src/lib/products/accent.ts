@@ -8,6 +8,11 @@ const ACCENT_CYCLE = [
   "#8A6FB0",
   "#1F1B18",
   "#D98C3C",
+  "#9C6B3F",
+  "#3E6259",
+  "#4B5563",
+  "#2B2B2B",
+  "#8C7A5C",
 ];
 
 export function accentFor(handle: string) {

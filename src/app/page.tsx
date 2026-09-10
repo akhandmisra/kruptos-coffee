@@ -5,12 +5,27 @@ import { ProductGrid } from "@/components/product-grid";
 export default async function HomePage() {
   const products = await getAllProducts();
   const featured = products.filter((p) => p.category === "coffee").slice(0, 3);
+  const gear = products.filter((p) => p.category === "equipment").slice(0, 3);
 
   return (
     <div>
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-bone/10">
-        <div className="mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
+        <div className="absolute inset-0 z-0">
+          <video
+            className="h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster="/images/estate-poster.jpg"
+          >
+            <source src="/videos/estate.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-ink/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-6xl px-5 py-24 sm:px-8 sm:py-32">
           <p className="animate-in font-mono text-xs uppercase tracking-[0.3em] text-crema">
             Chhattisgarh&apos;s First Specialty Roastery
           </p>
@@ -29,8 +44,8 @@ export default async function HomePage() {
             style={{ animationDelay: "160ms" }}
           >
             Every Kruptos roast ships with a QR code straight to the playlist
-            we roasted it to. Small batches, sourced direct from
-            Chikkamagaluru and Koraput, roasted by hand.
+            we roasted it to. Micro-lots sourced direct from planters across
+            India and beyond, fully traceable, hand-processed, hand-roasted.
           </p>
           <div
             className="animate-in mt-8 flex flex-wrap gap-4"
@@ -92,6 +107,34 @@ export default async function HomePage() {
           </p>
         </div>
       </section>
+
+      {/* Equipment & Tools */}
+      {gear.length > 0 && (
+        <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
+          <div className="mb-10 flex items-end justify-between">
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.25em] text-crema">
+                Buy Or Rent
+              </p>
+              <h2 className="mt-2 font-display text-4xl text-bone sm:text-5xl">
+                Equipment &amp; Tools
+              </h2>
+              <p className="mt-3 max-w-md font-sans text-sm text-bone-dim">
+                Everything to brew like the bar does — own it outright, or
+                rent it monthly with a refundable deposit while you figure
+                out what you like.
+              </p>
+            </div>
+            <Link
+              href="/shop?category=equipment"
+              className="hidden font-mono text-xs uppercase tracking-[0.2em] text-bone-dim hover:text-crema sm:block"
+            >
+              View all →
+            </Link>
+          </div>
+          <ProductGrid products={gear} />
+        </section>
+      )}
 
       {/* Visit */}
       <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">

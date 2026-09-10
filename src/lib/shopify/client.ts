@@ -10,8 +10,8 @@
  *    every product/cart call below hits the real Shopify Storefront API.
  */
 
-const domain = process.env.SHOPIFY_STORE_DOMAIN;
-const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+const domain = process.env.SHOPIFY_STORE_DOMAIN?.trim();
+const token = process.env.SHOPIFY_STOREFRONT_ACCESS_TOKEN?.trim();
 const apiVersion = "2025-01";
 
 export const isShopifyConfigured = Boolean(domain && token);
@@ -46,7 +46,7 @@ export async function shopifyFetch<T>({
 
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`Shopify Storefront API error (${res.status}): ${text}`);
+    throw new Error(`Shopify Storefront API error (${res.status}): ${text} [debug] domain="${domain}" tokenLength=${token?.length ?? 0} tokenStart="${token?.slice(0, 6)}"`);
   }
 
   const json = await res.json();

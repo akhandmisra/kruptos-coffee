@@ -32,6 +32,13 @@ export default async function ProductPage({
           ["Roast", product.specs.roast],
           ["Tasting Notes", product.specs.notes],
         ]
+      : product.category === "equipment"
+      ? [
+          ["Material", product.specs.origin],
+          ["Compatible Brew", product.specs.process],
+          ["Capacity", product.specs.roast],
+          ["Care", product.specs.notes],
+        ]
       : [];
 
   return (
@@ -42,12 +49,17 @@ export default async function ProductPage({
             title={product.title}
             accent={product.accent}
             category={product.category}
+            image={product.image}
           />
         </div>
 
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-crema">
-            {product.category === "coffee" ? "Now Playing" : "Merch"}
+            {product.category === "coffee"
+              ? "Now Playing"
+              : product.category === "equipment"
+              ? "Equipment & Tools"
+              : "Merch"}
           </p>
           <h1 className="mt-2 font-display text-5xl text-bone sm:text-6xl">
             {product.title}
