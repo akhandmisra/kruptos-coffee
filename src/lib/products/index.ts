@@ -50,7 +50,11 @@ function mapShopifyProduct(node: ShopifyProductNode): Product {
     image: node.featuredImage
       ? { url: node.featuredImage.url, alt: node.featuredImage.altText ?? node.title }
       : null,
-    category: node.tags.includes("merch") ? "merch" : "coffee",
+    category: node.tags.includes("equipment")
+      ? "equipment"
+      : node.tags.includes("merch")
+      ? "merch"
+      : "coffee",
     priceRange: node.priceRange,
     options: node.options,
     variants: node.variants.nodes,
