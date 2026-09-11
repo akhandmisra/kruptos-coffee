@@ -23,6 +23,16 @@ type ShopifyProductNode = {
   variants: { nodes: Product["variants"] };
 };
 
+// Tags are matched case-insensitively (Shopify's tag box auto-capitalizes,
+// e.g. "Origin:" instead of "origin:"), and the value is everything after
+// the first colon (so values can safely contain their own colons).
+function findTagValue(tags: string[], prefix: string): string | undefined {
+  const match = tags.find((t) => t.toLowerCase().startsWith(prefix));
+  if (!match) return undefined;
+  const value = match.slice(match.indexOf(":") + 1).trim();
+  return value.length > 0 ? value : undefined;
+}
+
 function mapShopifyProduct(node: ShopifyProductNode): Product {
   return {
     id: node.id,
@@ -31,20 +41,16 @@ function mapShopifyProduct(node: ShopifyProductNode): Product {
     tagline: node.description.split("\n")[0]?.slice(0, 120) ?? "",
     description: node.description,
     specs: {
-      origin: node.tags.find((t) => t.startsWith("origin:"))?.split(":")[1] ?? "—",
-      process: node.tags.find((t) => t.startsWith("process:"))?.split(":")[1] ?? "—",
-      roast: node.tags.find((t) => t.startsWith("roast:"))?.split(":")[1] ?? "—",
-      notes: node.tags.find((t) => t.startsWith("notes:"))?.split(":")[1] ?? "—",
+      origin: findTagValue(node.tags, "origin:") ?? "—",
+      process: findTagValue(node.tags, "process:") ?? "—",
+      roast: findTagValue(node.tags, "roast:") ?? "—",
+      notes: findTagValue(node.tags, "notes:") ?? "—",
     },
     accent: accentFor(node.handle),
     image: node.featuredImage
       ? { url: node.featuredImage.url, alt: node.featuredImage.altText ?? node.title }
       : null,
-    category: node.tags.includes("equipment")
-      ? "equipment"
-      : node.tags.includes("merch")
-      ? "merch"
-      : "coffee",
+    category: node.tags.includes("merch") ? "merch" : "coffee",
     priceRange: node.priceRange,
     options: node.options,
     variants: node.variants.nodes,
