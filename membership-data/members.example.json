@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Demo Lifetime Member",
+    "email": "lifetime.demo@example.com",
+    "status": "lifetime",
+    "validUntil": null
+  },
+  {
+    "name": "Demo Active Member",
+    "email": "active.demo@example.com",
+    "status": "active",
+    "validUntil": "2030-12-31"
+  },
+  {
+    "name": "Demo Expired Member",
+    "email": "expired.demo@example.com",
+    "status": "expired",
+    "validUntil": "2024-01-31"
+  }
+]

@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getAllProducts, getProduct } from "@/lib/products";
 import { ProductSleeve } from "@/components/product-sleeve";
 import { AddToCart } from "@/components/add-to-cart";
+import { getVerifiedMember, isRentalEnabled } from "@/lib/membership/session";
 
 export async function generateStaticParams() {
   const products = await getAllProducts();
@@ -23,6 +24,12 @@ export default async function ProductPage({
   const product = await getProduct(handle);
 
   if (!product) notFound();
+
+  const rentalEnabled = isRentalEnabled();
+  const verifiedMember =
+    rentalEnabled && product.category === "equipment"
+      ? await getVerifiedMember()
+      : null;
 
   const specEntries =
     product.category === "coffee"
@@ -86,7 +93,11 @@ export default async function ProductPage({
           )}
 
           <div className="mt-8">
-            <AddToCart product={product} />
+            <AddToCart
+              product={product}
+              rentalEnabled={rentalEnabled}
+              initialVerifiedMemberName={verifiedMember?.name ?? null}
+            />
           </div>
         </div>
       </div>

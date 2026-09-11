@@ -4,12 +4,39 @@ import { useMemo, useState } from "react";
 import { Product } from "@/lib/products/types";
 import { useCart } from "@/context/cart-context";
 import { formatMoney } from "@/lib/format";
+import { MembershipVerifyPanel } from "@/components/membership-verify-panel";
 
-export function AddToCart({ product }: { product: Product }) {
+export function AddToCart({
+  product,
+  rentalEnabled = false,
+  initialVerifiedMemberName = null,
+}: {
+  product: Product;
+  /** Master kill-switch for the whole rental feature — see src/lib/membership/session.ts. */
+  rentalEnabled?: boolean;
+  /** Set server-side from the "kruptos_member" cookie — see the product page. */
+  initialVerifiedMemberName?: string | null;
+}) {
   const { addItem, isLoading } = useCart();
+  const [verifiedMemberName, setVerifiedMemberName] = useState(initialVerifiedMemberName);
+  const isRentable = product.category === "equipment" && rentalEnabled;
+  const canRent = isRentable && verifiedMemberName !== null;
+
+  // Non-members never see "Rent" as an option at all — only Buy. Coffee and
+  // merch products are unaffected (they don't have a Type option to begin with).
+  const visibleOptions = useMemo(() => {
+    return product.options.map((option) => {
+      if (option.name !== "Type" || product.category !== "equipment") return option;
+      return {
+        ...option,
+        values: canRent ? option.values : option.values.filter((v) => v !== "Rent"),
+      };
+    });
+  }, [product.options, product.category, canRent]);
+
   const [selected, setSelected] = useState<Record<string, string>>(() => {
     const initial: Record<string, string> = {};
-    for (const option of product.options) {
+    for (const option of visibleOptions) {
       initial[option.name] = option.values[0];
     }
     return initial;
@@ -29,9 +56,15 @@ export function AddToCart({ product }: { product: Product }) {
     setTimeout(() => setAdded(false), 1500);
   };
 
+  async function handleLogout() {
+    await fetch("/api/membership/logout", { method: "POST" });
+    setVerifiedMemberName(null);
+    setSelected((prev) => (prev["Type"] === "Rent" ? { ...prev, Type: "Buy" } : prev));
+  }
+
   return (
     <div className="space-y-6">
-      {product.options.map((option) => (
+      {visibleOptions.map((option) => (
         <div key={option.name}>
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-crema">
             {option.name}
@@ -58,6 +91,25 @@ export function AddToCart({ product }: { product: Product }) {
           </div>
         </div>
       ))}
+
+      {isRentable && (
+        <div>
+          {canRent ? (
+            <p className="font-sans text-xs text-bone-dim">
+              Verified 1DM member ({verifiedMemberName}) — rental available, no
+              deposit.{" "}
+              <button
+                onClick={handleLogout}
+                className="underline decoration-dotted underline-offset-4"
+              >
+                Not you?
+              </button>
+            </p>
+          ) : (
+            <MembershipVerifyPanel onVerified={(name) => setVerifiedMemberName(name)} />
+          )}
+        </div>
+      )}
 
       <div className="flex items-center gap-4 pt-2">
         <span className="font-mono text-xl text-bone">
@@ -86,13 +138,9 @@ export function AddToCart({ product }: { product: Product }) {
             : "Add to crate"}
         </button>
       </div>
-      {variant?.rentalDeposit && (
-        <p className="font-mono text-xs text-bone-dim">
-          + {formatMoney(variant.rentalDeposit.amount, variant.rentalDeposit.currencyCode)}{" "}
-          refundable deposit, collected at pickup and returned when the
-          equipment comes back in working order.
-        </p>
-      )}
+      {/* Deposits no longer apply under the member-gated rental model — see
+          claude/kruptos-coffee-status.md. Verified members rent with no
+          deposit, and non-members never reach a Rent option at all. */}
     </div>
   );
 }
