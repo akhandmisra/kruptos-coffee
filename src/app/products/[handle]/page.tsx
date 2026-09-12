@@ -25,6 +25,16 @@ export default async function ProductPage({
 
   if (!product) notFound();
 
+  // Shopify products have no distinct tagline field — theirs is auto-derived
+  // from the description's opening sentence (see mapShopifyProduct), so it
+  // would otherwise repeat verbatim as soon as the full description renders
+  // right below it. Demo-mode products have a genuinely distinct, hand-written
+  // tagline, so this only ever suppresses the redundant, derived case.
+  const taglineIsRedundant = product.description
+    .trim()
+    .toLowerCase()
+    .startsWith(product.tagline.replace(/…$/, "").trim().toLowerCase());
+
   // rentalEnabled doubles as the general "1DM membership program is live"
   // flag — it gates the Rent option (equipment only) AND the 10% member
   // discount (every category), so verification status is needed everywhere,
@@ -72,9 +82,11 @@ export default async function ProductPage({
           <h1 className="mt-2 font-display text-5xl text-bone sm:text-6xl">
             {product.title}
           </h1>
-          <p className="mt-3 font-sans text-base text-bone-dim">
-            {product.tagline}
-          </p>
+          {!taglineIsRedundant && (
+            <p className="mt-3 font-sans text-base text-bone-dim">
+              {product.tagline}
+            </p>
+          )}
 
           <div className="mt-8 space-y-2 whitespace-pre-line font-sans text-sm leading-relaxed text-bone-dim">
             {product.description}

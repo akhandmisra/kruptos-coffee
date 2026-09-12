@@ -33,13 +33,58 @@ function findTagValue(tags: string[], prefix: string): string | undefined {
   return value.length > 0 ? value : undefined;
 }
 
+function decodeHtmlEntities(str: string): string {
+  return str
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#0?39;/g, "'");
+}
+
+// NOTE: this catalog's `descriptionHtml` field turned out to be unreliable
+// (some products have it double HTML-entity-escaped from however they were
+// created), so paragraphs are derived from the plain `description` field
+// instead. Shopify's plain-text conversion strips <p> tags without
+// inserting any separator, so two paragraphs can end up glued together as
+// "...detail.Next sentence..." with no space — that collapse always
+// happens at a period immediately followed by a capital letter, so
+// splitting there safely restores real paragraph breaks (joined with
+// \n\n, matching demo-data.ts's convention) instead of the description
+// rendering, and the auto-derived tagline duplicating, one run-on blob.
+function splitIntoParagraphs(text: string): string[] {
+  const decoded = decodeHtmlEntities(text).replace(/\.{2,}/g, ".");
+  return decoded
+    .split(/\n+/)
+    .flatMap((chunk) => chunk.split(/(?<=\.)(?=[A-Z])/))
+    .map((p) => p.trim())
+    .filter(Boolean);
+}
+
+function firstSentence(text: string, maxLen = 140): string {
+  const match = text.match(/^.*?[.!?](?=\s|$)/);
+  const sentence = match ? match[0] : text;
+  return sentence.length > maxLen
+    ? `${sentence.slice(0, maxLen - 1).trimEnd()}…`
+    : sentence;
+}
+
 function mapShopifyProduct(node: ShopifyProductNode): Product {
+  const paragraphs = splitIntoParagraphs(node.description);
+  const description = paragraphs.length
+    ? paragraphs.join("\n\n")
+    : node.description;
+  const tagline = paragraphs.length
+    ? firstSentence(paragraphs[0])
+    : node.description.split("\n")[0]?.slice(0, 120) ?? "";
+
   return {
     id: node.id,
     handle: node.handle,
     title: node.title,
-    tagline: node.description.split("\n")[0]?.slice(0, 120) ?? "",
-    description: node.description,
+    tagline,
+    description,
     specs: {
       origin: findTagValue(node.tags, "origin:") ?? "—",
       process: findTagValue(node.tags, "process:") ?? "—",

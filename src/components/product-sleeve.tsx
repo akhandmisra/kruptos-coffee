@@ -38,13 +38,18 @@ export function ProductSleeve({
         />
       )}
 
-      {/* vinyl disc, offset to the right, slides out further on hover */}
-      <div
-        className="absolute top-1/2 right-0 h-[85%] w-[85%] -translate-y-1/2 translate-x-[38%] rounded-full bg-[radial-gradient(circle_at_center,_#0000_0,_#0000_18%,_#000_18.5%,_#111_19%,_#000_38%,_#111_38.5%,_#000_60%)] opacity-90 transition-transform duration-500 ease-out group-hover:translate-x-[50%]"
-        aria-hidden
-      >
-        <div className="absolute inset-0 m-auto h-[22%] w-[22%] rounded-full border-4 border-ink bg-bone" />
-      </div>
+      {/* vinyl disc, offset to the right, slides out further on hover.
+          The record-sleeve motif ties to coffee's roast+playlist pairing —
+          it doesn't apply to equipment, and now that real gear photos exist
+          it just clashes with them, so equipment skips it entirely. */}
+      {category !== "equipment" && (
+        <div
+          className="absolute top-1/2 right-0 h-[85%] w-[85%] -translate-y-1/2 translate-x-[38%] rounded-full bg-[radial-gradient(circle_at_center,_#0000_0,_#0000_18%,_#000_18.5%,_#111_19%,_#000_38%,_#111_38.5%,_#000_60%)] opacity-90 transition-transform duration-500 ease-out group-hover:translate-x-[50%]"
+          aria-hidden
+        >
+          <div className="absolute inset-0 m-auto h-[22%] w-[22%] rounded-full border-4 border-ink bg-bone" />
+        </div>
+      )}
 
       {image && (
         <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/10 to-transparent" />
