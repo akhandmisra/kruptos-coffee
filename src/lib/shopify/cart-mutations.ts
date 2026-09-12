@@ -3,6 +3,10 @@ export const CART_FRAGMENT = /* GraphQL */ `
     id
     checkoutUrl
     totalQuantity
+    discountCodes {
+      code
+      applicable
+    }
     cost {
       subtotalAmount {
         amount
@@ -101,6 +105,24 @@ export const GET_CART_QUERY = /* GraphQL */ `
   query GetCart($cartId: ID!) {
     cart(id: $cartId) {
       ...CartFragment
+    }
+  }
+`;
+
+// Used to silently attach/detach the "1DM-MEMBER10" auto-discount based on
+// verified-member session state — see src/app/api/cart/route.ts. The
+// customer never sees or types a code; passing an empty array removes
+// whatever code is currently on the cart.
+export const CART_DISCOUNT_CODES_UPDATE_MUTATION = /* GraphQL */ `
+  ${CART_FRAGMENT}
+  mutation CartDiscountCodesUpdate($cartId: ID!, $discountCodes: [String!]) {
+    cartDiscountCodesUpdate(cartId: $cartId, discountCodes: $discountCodes) {
+      cart {
+        ...CartFragment
+      }
+      userErrors {
+        message
+      }
     }
   }
 `;

@@ -25,11 +25,12 @@ export default async function ProductPage({
 
   if (!product) notFound();
 
+  // rentalEnabled doubles as the general "1DM membership program is live"
+  // flag — it gates the Rent option (equipment only) AND the 10% member
+  // discount (every category), so verification status is needed everywhere,
+  // not just on equipment pages.
   const rentalEnabled = isRentalEnabled();
-  const verifiedMember =
-    rentalEnabled && product.category === "equipment"
-      ? await getVerifiedMember()
-      : null;
+  const verifiedMember = rentalEnabled ? await getVerifiedMember() : null;
 
   const specEntries =
     product.category === "coffee"

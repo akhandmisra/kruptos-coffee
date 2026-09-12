@@ -31,6 +31,10 @@ type CartContextValue = {
   addItem: (product: Product, variant: ProductVariant) => Promise<void>;
   updateQuantity: (lineId: string, quantity: number) => Promise<void>;
   removeItem: (lineId: string) => Promise<void>;
+  /** Re-fetches the cart from Shopify so it reflects the current membership
+   * session (e.g. the 1DM member discount attaching/detaching) without the
+   * customer having to touch a line item first. No-op in demo mode. */
+  refreshCart: () => Promise<void>;
   checkoutUrl: string | null;
 };
 
@@ -223,6 +227,29 @@ export function CartProvider({
     [cart.id, liveMode]
   );
 
+  const refreshCart = useCallback(async () => {
+    if (!liveMode) return;
+    const cartId = cart.id ?? localStorage.getItem("kruptos-cart-id");
+    if (!cartId) return;
+    setIsLoading(true);
+    try {
+      const res = await fetch("/api/cart", {
+        method: "POST",
+        body: JSON.stringify({ action: "get", cartId }),
+      });
+      const data = await res.json();
+      if (data.cart) {
+        setCart({
+          id: data.cart.id,
+          lines: data.cart.lines,
+          checkoutUrl: data.cart.checkoutUrl,
+        });
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }, [liveMode, cart.id]);
+
   const subtotal = useMemo(
     () =>
       cart.lines.reduce(
@@ -264,6 +291,7 @@ export function CartProvider({
     addItem,
     updateQuantity,
     removeItem,
+    refreshCart,
     checkoutUrl: cart.checkoutUrl,
   };
 

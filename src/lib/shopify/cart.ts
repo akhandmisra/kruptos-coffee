@@ -1,6 +1,7 @@
 import { shopifyFetch } from "./client";
 import {
   CART_CREATE_MUTATION,
+  CART_DISCOUNT_CODES_UPDATE_MUTATION,
   CART_LINES_ADD_MUTATION,
   CART_LINES_REMOVE_MUTATION,
   CART_LINES_UPDATE_MUTATION,
@@ -11,6 +12,7 @@ export type ShopifyCart = {
   id: string;
   checkoutUrl: string;
   totalQuantity: number;
+  discountCodes: { code: string; applicable: boolean }[];
   cost: {
     subtotalAmount: { amount: string; currencyCode: string };
     totalAmount: { amount: string; currencyCode: string };
@@ -92,4 +94,29 @@ export async function shopifyCartGet(cartId: string) {
     cache: "no-store",
   });
   return data.cart;
+}
+
+/** Silently attach or detach discount codes — pass [] to remove all codes
+ * currently on the cart. Used to auto-apply the "1DM-MEMBER10" member
+ * discount with no code the customer ever sees or types. */
+export async function shopifyCartApplyDiscount(
+  cartId: string,
+  discountCodes: string[]
+) {
+  const data = await shopifyFetch<{
+    cartDiscountCodesUpdate: {
+      cart: ShopifyCart;
+      userErrors: { message: string }[];
+    };
+  }>({
+    query: CART_DISCOUNT_CODES_UPDATE_MUTATION,
+    variables: { cartId, discountCodes },
+    cache: "no-store",
+  });
+  if (data.cartDiscountCodesUpdate.userErrors.length) {
+    throw new Error(
+      data.cartDiscountCodesUpdate.userErrors.map((e) => e.message).join(", ")
+    );
+  }
+  return data.cartDiscountCodesUpdate.cart;
 }

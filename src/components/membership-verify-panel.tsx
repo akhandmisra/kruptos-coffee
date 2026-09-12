@@ -14,8 +14,12 @@ type Step = "prompt" | "email" | "code";
  */
 export function MembershipVerifyPanel({
   onVerified,
+  promptLabel = "1DM member? Verify your email to unlock rental",
 }: {
   onVerified: (name: string) => void;
+  /** Lets pages that aren't about rental (coffee, merch, equipment Buy-only)
+   * use copy about the 10% discount instead. */
+  promptLabel?: string;
 }) {
   const [step, setStep] = useState<Step>("prompt");
   const [email, setEmail] = useState("");
@@ -77,7 +81,7 @@ export function MembershipVerifyPanel({
         onClick={() => setStep("email")}
         className="rounded-full border border-bone/25 px-4 py-1.5 font-sans text-sm text-bone-dim underline decoration-dotted underline-offset-4 transition-colors hover:border-bone/60 hover:text-bone"
       >
-        1DM member? Verify your email to unlock rental
+        {promptLabel}
       </button>
     );
   }

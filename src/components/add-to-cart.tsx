@@ -17,10 +17,16 @@ export function AddToCart({
   /** Set server-side from the "kruptos_member" cookie — see the product page. */
   initialVerifiedMemberName?: string | null;
 }) {
-  const { addItem, isLoading } = useCart();
+  const { addItem, isLoading, refreshCart } = useCart();
   const [verifiedMemberName, setVerifiedMemberName] = useState(initialVerifiedMemberName);
   const isRentable = product.category === "equipment" && rentalEnabled;
   const canRent = isRentable && verifiedMemberName !== null;
+  const isVerified = verifiedMemberName !== null;
+  // The verify-panel/verified-status UI shows on every category once the
+  // membership program is live — not just equipment — because the 10%
+  // member discount applies store-wide (Buy items), while Rent itself
+  // stays equipment-only (see isRentable above).
+  const showMembershipUI = rentalEnabled;
 
   // Non-members never see "Rent" as an option at all — only Buy. Coffee and
   // merch products are unaffected (they don't have a Type option to begin with).
@@ -49,6 +55,11 @@ export function AddToCart({
     );
   }, [product.variants, selected]);
 
+  // Buy-only: a variant with a rentalPeriod is a Rent variant, and the 1DM
+  // member discount was deliberately scoped in Shopify to exclude those —
+  // this mirrors that rule for the price preview shown here.
+  const showMemberPrice = rentalEnabled && isVerified && !variant?.rentalPeriod;
+
   const handleAdd = async () => {
     if (!variant) return;
     await addItem(product, variant);
@@ -60,6 +71,9 @@ export function AddToCart({
     await fetch("/api/membership/logout", { method: "POST" });
     setVerifiedMemberName(null);
     setSelected((prev) => (prev["Type"] === "Rent" ? { ...prev, Type: "Buy" } : prev));
+    // Drops the member discount from an already-started cart right away,
+    // rather than leaving it applied until the next add/update/remove.
+    void refreshCart();
   }
 
   return (
@@ -92,12 +106,14 @@ export function AddToCart({
         </div>
       ))}
 
-      {isRentable && (
+      {showMembershipUI && (
         <div>
-          {canRent ? (
+          {isVerified ? (
             <p className="font-sans text-xs text-bone-dim">
-              Verified 1DM member ({verifiedMemberName}) — rental available, no
-              deposit.{" "}
+              Verified 1DM member ({verifiedMemberName}) —{" "}
+              {isRentable
+                ? "rental available with no deposit, plus 10% off Buy purchases."
+                : "10% member discount applied automatically."}{" "}
               <button
                 onClick={handleLogout}
                 className="underline decoration-dotted underline-offset-4"
@@ -106,7 +122,19 @@ export function AddToCart({
               </button>
             </p>
           ) : (
-            <MembershipVerifyPanel onVerified={(name) => setVerifiedMemberName(name)} />
+            <MembershipVerifyPanel
+              onVerified={(name) => {
+                setVerifiedMemberName(name);
+                // Attaches the member discount to an already-started cart
+                // the instant they verify — no need to touch a line item.
+                void refreshCart();
+              }}
+              promptLabel={
+                isRentable
+                  ? undefined
+                  : "1DM member? Verify your email for 10% off"
+              }
+            />
           )}
         </div>
       )}
@@ -115,7 +143,19 @@ export function AddToCart({
         <span className="font-mono text-xl text-bone">
           {variant ? (
             <>
-              {formatMoney(variant.price.amount, variant.price.currencyCode)}
+              {showMemberPrice ? (
+                <>
+                  <span className="mr-2 font-sans text-sm text-bone-dim line-through">
+                    {formatMoney(variant.price.amount, variant.price.currencyCode)}
+                  </span>
+                  {formatMoney(
+                    Number(variant.price.amount) * 0.9,
+                    variant.price.currencyCode
+                  )}
+                </>
+              ) : (
+                formatMoney(variant.price.amount, variant.price.currencyCode)
+              )}
               {variant.rentalPeriod && (
                 <span className="text-sm text-bone-dim">
                   /{variant.rentalPeriod}
