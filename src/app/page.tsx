@@ -18,9 +18,10 @@ export default async function HomePage() {
             muted
             loop
             playsInline
-            poster="/images/estate-poster.jpg"
+            poster="/images/estate-journey-poster.jpg"
           >
-            <source src="/videos/estate.mp4" type="video/mp4" />
+            <source src="/videos/estate-journey.webm" type="video/webm" />
+            <source src="/videos/estate-journey.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-ink/70" />
           <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/10" />

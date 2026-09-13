@@ -1,0 +1,93 @@
+Kruptos Coffee — Homepage hero: new "estate journey" background video
+========================================================================
+
+What this does
+---------------
+Replaces the short single-clip hero video (estate.mp4, 7s) with a longer, mixed
+video compiled from all the estate footage you sent, cut into one continuous
+"estate journey" that loops behind the homepage headline:
+
+  1. Arriving at the estate — POV drive down the tree-lined road (IMG_3055)
+  2. Ripe cherries on the branch, close up                       (IMG_3011)
+  3. Cherries pulling back to reveal the drying yard and building (IMG_3047)
+  4. Beans spread across the drying patio, camera panning         (IMG_3048)
+  5. Best-quality macro of the drying beans, finale                (IMG_3053)
+
+Each shot crossfades into the next, it's silent, and it loops back to the
+start when it ends. Total length: 33.8 seconds — about 5x longer than the
+old estate.mp4 — and full 1080x1920 (Full HD pixel count) throughout.
+
+Editorial choices worth knowing about
+--------------------------------------
+- IMG_3053 came in twice (a .mov and a lower-res .MP4 re-export of the exact
+  same 8.9s clip). I used only the .mov — it's genuinely native 1920x1080
+  footage, the sharpest source you sent — and skipped the duplicate .MP4
+  since it's the same shot at lower quality.
+- IMG_3055 (the driving shot) is landscape (1280x720) and everything else is
+  vertical phone footage. Rather than crop it down to a narrow sliver to fit
+  the vertical frame (which would've thrown away most of the shot) or pad it
+  with plain bars, I sat the full frame on a softly blurred, filled-out
+  version of itself — same trick used on the 1DM hero fix. You'll see it as
+  a bit of soft blur at the top/bottom of that one shot; the driving footage
+  itself stays full-frame and sharp.
+- I trimmed IMG_3055 to its first ~8 seconds — the camera gets noticeably
+  shakier and swings to an extreme close-up of leaves in the last few
+  seconds of that clip, so I cut before that happens.
+- Every clip is scaled to the final 1080x1920 canvas in a single pass (no
+  upscale-then-downscale round trips), same lesson as the 1DM project.
+
+What's in this patch
+---------------------
+- public/videos/estate-journey.mp4 (~14MB) and estate-journey.webm (~12MB) —
+  the compiled video. Browsers pick whichever they support (webm is smaller,
+  listed first). Compressed a bit harder than my first pass so the whole
+  patch fits under this chat's upload limit — still full 1080x1920 throughout,
+  no resolution or length was traded away, just bitrate.
+- public/images/estate-journey-poster.jpg — poster frame from the drying-yard
+  reveal shot, shown instantly while the video loads.
+- src/app/page.tsx — hero section now points at the new video/poster files.
+  This is a two-line change (new filenames + an added webm source) — safe to
+  just overwrite your current copy with this one.
+
+This ADDS new files alongside the old ones rather than overwriting them —
+public/videos/estate.mp4 and public/images/estate-poster.jpg are no longer
+referenced by anything after this patch, so delete them once you've checked
+the new video looks right (commands below do this for you, commented out).
+
+Apply it
+--------
+1. cd ~/Downloads
+   rm -rf kruptos-estate-journey
+   ZIP=$(ls -t kruptos-estate-journey*.zip | head -1)
+   echo "Using: $ZIP"
+   unzip -o "$ZIP" -d kruptos-estate-journey
+
+2. cd ~/Desktop/Akhand/Work/kruptos-coffee
+   cp -r ~/Downloads/kruptos-estate-journey/. ~/Desktop/Akhand/Work/kruptos-coffee/
+
+3. rm -rf .next
+   npm run build -- --webpack
+   npm run start
+
+4. Check http://localhost:3000 — the hero should now run a much longer loop:
+   driving up to the estate → cherries on the branch → pulling back to the
+   drying yard → beans drying → the macro finale, then back to the start.
+
+5. Once you're happy with it, remove the now-unused old hero assets:
+   rm -f public/videos/estate.mp4 public/images/estate-poster.jpg
+
+6. git add -A
+   git commit -m "Replace hero video with longer, full HD estate-journey compilation"
+   git push
+
+Worth knowing
+-------------
+- File size is up a good amount (~26MB combined vs ~1.5MB before) — that's
+  the direct cost of it being both much longer (33.8s vs 7s) and full 1080x1920
+  resolution throughout, both of which you asked for specifically. Say the
+  word if you'd rather trade some length or resolution back for a lighter
+  mobile-data footprint.
+- Verified: production build passes clean, and I checked the hero at both
+  desktop and phone widths partway through the loop to confirm every segment
+  renders full-frame with no cropping artifacts or black bars, including the
+  blurred-fill treatment on the driving shot.
