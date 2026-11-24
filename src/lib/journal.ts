@@ -18,6 +18,86 @@ export type JournalArticle = {
 
 export const journalArticles: JournalArticle[] = [
   {
+    slug: "coffee-machine-on-rent-raipur",
+    title: "Coffee Machine on Rent in Raipur: What It Costs and Which One to Pick",
+    dek: "Renting an espresso machine, grinder or brewer before you buy one makes a lot of sense. Here's what renting costs in Raipur, which machine suits a home, office or cafe, and what to check before you sign up.",
+    readTime: "6 min read",
+    publishedAt: "2026-11-24",
+    body: [
+      {
+        type: "p",
+        text: "Search for a coffee machine on rent in Raipur and almost everything you'll find is an instant-coffee vending machine: premix powder, a button, and a cup that tastes the same as every office in India. That's fine if all you need is something hot. But if you want real espresso, a flat white or a good pour-over at home or at work, a vending machine won't get you there — and buying a proper espresso machine and grinder outright can run into lakhs before you know whether you'll use it.",
+      },
+      {
+        type: "p",
+        text: "That's the gap renting fills. At Kruptos we rent the same espresso machines, grinders and brewers we use and sell, from a few hundred rupees a month, so you can live with the equipment before you commit to it.",
+      },
+      { type: "h2", text: "What does it cost to rent a coffee machine in Raipur?" },
+      {
+        type: "p",
+        text: "Monthly rent depends on the machine. As a guide, from our current range:",
+      },
+      {
+        type: "list",
+        items: [
+          "Pour-over drippers, French presses and cold brew pots: roughly ₹150–350 a month.",
+          "AeroPress: ₹350 a month.",
+          "Hand grinders such as the Timemore C3S or Comandante: ₹450–1,200 a month.",
+          "Electric grinders for filter or espresso (Baratza Encore ESP, Fellow Ode, DF64, Mahlkönig X54): ₹1,100–2,100 a month.",
+          "Espresso machine (Meraki): about ₹7,000 a month.",
+        ],
+      },
+      {
+        type: "p",
+        text: "Prices on the rental page are always the current ones. Rentals normally carry a refundable deposit; 1DM Elite Club members rent with no deposit, get a 3-day free trial, and have 10% of their rent credited toward buying the machine if they decide to keep it.",
+      },
+      { type: "h2", text: "Which machine should you rent?" },
+      {
+        type: "p",
+        text: "For home, if you mostly drink black coffee, rent a good grinder and a simple brewer first — an AeroPress or a V60 with a Timemore grinder makes better coffee than most cafes for under ₹1,000 a month. If you drink lattes and cappuccinos every day, that's when an espresso machine and an espresso grinder earn their place.",
+      },
+      {
+        type: "p",
+        text: "For an office, think about cups per day. Up to about 20 cups a day, a home-class espresso machine with a good grinder works well. Beyond that you want a commercial grinder and a machine that can keep up, plus a regular supply of fresh beans. Tell us your headcount and we'll suggest a setup.",
+      },
+      {
+        type: "p",
+        text: "For a cafe or restaurant, renting lets you open or upgrade your coffee bar without tying up capital in equipment. We set the machine up, dial in your recipe and train your staff — the same way we train the baristas at 1DM's cafes.",
+      },
+      { type: "h2", text: "Renting vs a vending machine" },
+      {
+        type: "list",
+        items: [
+          "A vending machine uses premix or instant coffee; an espresso machine and grinder use freshly roasted beans ground for each cup.",
+          "A vending machine is one button for everyone; a proper setup lets you make espresso, milk drinks, pour-over or cold brew.",
+          "Vending is cheaper per cup at very high volume; for homes, small offices and cafes, the cost difference is smaller than most people expect — and the coffee isn't comparable.",
+        ],
+      },
+      { type: "h2", text: "What to check before you rent" },
+      {
+        type: "list",
+        items: [
+          "Who sets it up and shows you how to use it — a machine nobody can dial in makes bad coffee.",
+          "What happens if something breaks, and how quickly it's handled.",
+          "Whether you can buy the machine later, and whether any of your rent counts toward it.",
+          "Where your beans will come from. The machine is only as good as the coffee in it — use beans with a roast date, ideally within a month of roasting.",
+        ],
+      },
+      {
+        type: "p",
+        text: "We rent across Raipur, Bhilai and Bilaspur. Tell us where the machine is going and roughly how many cups a day you make, and we'll come back with the right setup and the monthly rent.",
+      },
+      {
+        type: "links",
+        items: [
+          { href: "/coffee-machine-rental", label: "See coffee machines on rent and get a quote" },
+          { href: "/journal/how-to-choose-a-coffee-grinder-india", label: "How to choose a coffee grinder in India" },
+          { href: "https://www.1dm.coffee/club", label: "1DM Elite Club — zero-deposit rental and 3-day trial" },
+        ],
+      },
+    ],
+  },
+  {
     slug: "bastar-coffee-chhattisgarh",
     title: "Bastar Coffee: How Chhattisgarh Became India's Newest Coffee Region",
     dek: "Coffee in Chhattisgarh sounds unlikely until you see the shaded slopes of Bastar. Here's how coffee came to the region, what it tastes like, and why we roast it.",

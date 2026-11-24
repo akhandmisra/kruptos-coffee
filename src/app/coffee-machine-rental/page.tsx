@@ -198,6 +198,10 @@ export default async function CoffeeMachineRentalPage() {
             <Link href="/wholesale" className="text-crema underline">
               wholesale supply
             </Link>
+            . Not sure which machine to rent? Read{" "}
+            <Link href="/journal/coffee-machine-on-rent-raipur" className="text-crema underline">
+              what renting costs and which one to pick
+            </Link>
             .
           </p>
         </div>
