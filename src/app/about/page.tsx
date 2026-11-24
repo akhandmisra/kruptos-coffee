@@ -1,6 +1,11 @@
 import Image from "next/image";
 
-export const metadata = { title: "Our Story — Kruptos Coffee Roasters" };
+export const metadata = {
+  title: "Our Story — Chhattisgarh's First Specialty Coffee Roastery",
+  description:
+    "How Kruptos Coffee Roasters grew out of 1DM cafe in Raipur: five years of R&D at origin, coffee grown in Bastar, Chhattisgarh, and a playlist with every roast.",
+  alternates: { canonical: "/about" },
+};
 
 const SECTIONS = [
   {

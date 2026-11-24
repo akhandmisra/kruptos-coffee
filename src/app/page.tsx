@@ -2,6 +2,8 @@ import Link from "next/link";
 import { getAllProducts } from "@/lib/products";
 import { ProductGrid } from "@/components/product-grid";
 
+export const metadata = { alternates: { canonical: "/" } };
+
 export default async function HomePage() {
   const products = await getAllProducts();
   const featured = products.filter((p) => p.category === "coffee").slice(0, 3);
@@ -137,19 +139,33 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Visit */}
-      <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-        <div className="rounded-sm border border-bone/10 bg-ink-raised p-8 sm:p-12">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-crema">
-            Also Available At
-          </p>
-          <h2 className="mt-2 font-display text-3xl text-bone sm:text-4xl">
-            10+ 1DollarCoffee outlets, across multiple cities.
-          </h2>
+      {/* Wholesale + Visit */}
+      <section className="mx-auto grid max-w-6xl gap-6 px-5 py-20 sm:grid-cols-2 sm:px-8">
+        <div className="rounded-sm border border-bone/10 bg-ink-raised p-8 sm:p-10">
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-crema">For Cafes, Hotels &amp; Offices</p>
+          <h2 className="mt-2 font-display text-3xl text-bone sm:text-4xl">Wholesale specialty coffee.</h2>
           <p className="mt-3 max-w-xl font-sans text-sm text-bone-dim">
-            Can&apos;t wait for shipping? Kruptos roasts are already pouring
-            at select 1DollarCoffee locations.
+            Fresh roasts, recipes, barista training and equipment on rent — for your menu.
           </p>
+          <Link
+            href="/wholesale"
+            className="mt-6 inline-block rounded-full bg-crema px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] text-ink hover:opacity-90"
+          >
+            Get wholesale pricing
+          </Link>
+        </div>
+        <div className="rounded-sm border border-bone/10 bg-ink-raised p-8 sm:p-10">
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-crema">Also Pouring At</p>
+          <h2 className="mt-2 font-display text-3xl text-bone sm:text-4xl">1DM cafes in Raipur, Bhilai &amp; Bilaspur.</h2>
+          <p className="mt-3 max-w-xl font-sans text-sm text-bone-dim">
+            Can&apos;t wait for shipping? Kruptos roasts are on the bar at every 1DM specialty coffee cafe.
+          </p>
+          <a
+            href="https://www.1dm.coffee/locations"
+            className="mt-6 inline-block rounded-full border border-bone/25 px-6 py-3 font-mono text-xs uppercase tracking-[0.25em] text-bone hover:border-crema hover:text-crema"
+          >
+            Find a 1DM cafe
+          </a>
         </div>
       </section>
     </div>

@@ -54,6 +54,21 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/wholesale" className="hover:text-bone">
+                  Wholesale
+                </Link>
+              </li>
+              <li>
+                <Link href="/journal" className="hover:text-bone">
+                  Journal
+                </Link>
+              </li>
+              <li>
+                <a href="https://www.1dm.coffee" className="hover:text-bone">
+                  1DM Cafes
+                </a>
+              </li>
+              <li>
                 <Link href="/contact" className="hover:text-bone">
                   Contact
                 </Link>

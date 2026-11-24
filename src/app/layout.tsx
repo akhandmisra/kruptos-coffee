@@ -12,17 +12,45 @@ import { isShopifyConfigured } from "@/lib/shopify/client";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { CartDrawer } from "@/components/cart-drawer";
+import { siteUrl, siteName, defaultOgImage, organizationSchema } from "@/lib/site";
+
+const description =
+  "Kruptos Coffee Roasters — Chhattisgarh's first specialty coffee roastery. Buy fresh small-batch specialty coffee beans online in India, coffee grown in Bastar, brewing equipment to buy or rent, and wholesale beans for cafes.";
 
 export const metadata: Metadata = {
-  title: "Kruptos Coffee Roasters",
-  description:
-    "Chhattisgarh's first specialty coffee roastery. Small-batch roasts, each one paired with a playlist.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Kruptos Coffee Roasters | Specialty Coffee Beans Online — Raipur, Chhattisgarh",
+    template: "%s | Kruptos Coffee Roasters",
+  },
+  description,
+  applicationName: siteName,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName,
+    url: siteUrl,
+    title: "Kruptos Coffee Roasters | Specialty Coffee from Chhattisgarh",
+    description,
+    images: [defaultOgImage],
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kruptos Coffee Roasters | Specialty Coffee from Chhattisgarh",
+    description,
+    images: [defaultOgImage],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full antialiased">
       <body className="grain min-h-full flex flex-col font-sans bg-ink text-bone">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
+        />
         <CartProvider liveMode={isShopifyConfigured}>
           <Header />
           <main className="flex-1">{children}</main>

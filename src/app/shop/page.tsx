@@ -2,7 +2,12 @@ import { getAllProducts } from "@/lib/products";
 import { ProductGrid } from "@/components/product-grid";
 import Link from "next/link";
 
-export const metadata = { title: "Shop — Kruptos Coffee Roasters" };
+export const metadata = {
+  title: "Shop Specialty Coffee Beans, Grinders & Brewing Gear",
+  description:
+    "Buy fresh-roasted specialty coffee beans online in India from Kruptos, plus grinders, drippers, kettles, scales and espresso machines — to buy outright or rent monthly.",
+  alternates: { canonical: "/shop" },
+};
 
 export default async function ShopPage({
   searchParams,

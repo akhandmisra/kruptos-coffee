@@ -3,6 +3,7 @@ import { getAllProducts, getProduct } from "@/lib/products";
 import { ProductSleeve } from "@/components/product-sleeve";
 import { AddToCart } from "@/components/add-to-cart";
 import { getVerifiedMember, isRentalEnabled } from "@/lib/membership/session";
+import { siteUrl } from "@/lib/site";
 
 export async function generateStaticParams() {
   const products = await getAllProducts();
@@ -14,7 +15,20 @@ export async function generateMetadata({
 }: PageProps<"/products/[handle]">) {
   const { handle } = await params;
   const product = await getProduct(handle);
-  return { title: product ? `${product.title} — Kruptos Coffee` : "Not found" };
+  if (!product) return { title: "Not found" };
+  const kind = product.category === "coffee" ? "Specialty Coffee Beans" : product.category === "equipment" ? "Buy or Rent" : "Merch";
+  const desc = (product.description || product.tagline).replace(/\s+/g, " ").trim().slice(0, 155);
+  return {
+    title: `${product.title} — ${kind}`,
+    description: desc,
+    alternates: { canonical: `/products/${product.handle}` },
+    openGraph: {
+      title: `${product.title} | Kruptos Coffee Roasters`,
+      description: desc,
+      url: `/products/${product.handle}`,
+      images: product.image ? [product.image.url] : undefined,
+    },
+  };
 }
 
 export default async function ProductPage({
@@ -59,8 +73,31 @@ export default async function ProductPage({
         ]
       : [];
 
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.title,
+    description: product.description || product.tagline,
+    url: `${siteUrl}/products/${product.handle}`,
+    image: product.image ? [product.image.url] : [`${siteUrl}/images/estate-banner.jpg`],
+    brand: { "@type": "Brand", name: "Kruptos Coffee Roasters" },
+    category: product.category === "coffee" ? "Coffee beans" : product.category === "equipment" ? "Coffee equipment" : "Merchandise",
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: product.priceRange.minVariantPrice.currencyCode,
+      lowPrice: product.priceRange.minVariantPrice.amount,
+      highPrice: product.priceRange.maxVariantPrice.amount,
+      offerCount: product.variants.length,
+      availability: product.variants.some((v) => v.availableForSale)
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      seller: { "@id": `${siteUrl}/#organization` },
+    },
+  };
+
   return (
     <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }} />
       <div className="grid gap-12 sm:grid-cols-2">
         <div className="sm:sticky sm:top-24 sm:self-start">
           <ProductSleeve
