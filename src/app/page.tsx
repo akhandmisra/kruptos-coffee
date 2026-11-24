@@ -125,7 +125,10 @@ export default async function HomePage() {
               <p className="mt-3 max-w-md font-sans text-sm text-bone-dim">
                 Everything to brew like the bar does — own it outright, or
                 rent it monthly with a refundable deposit while you figure
-                out what you like.
+                out what you like.{" "}
+                <Link href="/coffee-machine-rental" className="text-crema underline">
+                  Coffee machines on rent in Raipur →
+                </Link>
               </p>
             </div>
             <Link

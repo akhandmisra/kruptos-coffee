@@ -98,8 +98,8 @@ export default function WholesalePage() {
               current roasts
             </Link>{" "}
             and{" "}
-            <Link href="/shop?category=equipment" className="text-crema underline">
-              equipment
+            <Link href="/coffee-machine-rental" className="text-crema underline">
+              coffee machines on rent
             </Link>
             .
           </p>
