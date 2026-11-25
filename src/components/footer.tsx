@@ -59,6 +59,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/coffee-beans-raipur" className="hover:text-bone">
+                  Buy coffee beans in Raipur
+                </Link>
+              </li>
+              <li>
                 <Link href="/coffee-equipment-supplier" className="hover:text-bone">
                   Coffee equipment supplier
                 </Link>
