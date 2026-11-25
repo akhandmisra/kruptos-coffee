@@ -64,6 +64,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/espresso-machines-chhattisgarh" className="hover:text-bone">
+                  Espresso machines, Chhattisgarh
+                </Link>
+              </li>
+              <li>
                 <Link href="/brewing-gadgets-dealer-chhattisgarh" className="hover:text-bone">
                   Brewing Gadgets dealer, Chhattisgarh
                 </Link>

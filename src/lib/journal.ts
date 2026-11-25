@@ -18,6 +18,62 @@ export type JournalArticle = {
 
 export const journalArticles: JournalArticle[] = [
   {
+    slug: "espresso-machine-for-cafe-india-buyers-guide",
+    title: "Choosing an Espresso Machine for a Cafe in India: Buy, Rent or Lease?",
+    dek: "What to look for in a commercial espresso machine and grinder, how many groups you actually need, and when renting makes more sense than buying — from a roaster that sets up cafe bars in Chhattisgarh.",
+    readTime: "7 min read",
+    publishedAt: "2026-11-25",
+    body: [
+      {
+        type: "p",
+        text: "The espresso machine is the most expensive single thing most cafes buy, and the one people most often get wrong — usually by buying too much machine, or the wrong grinder to go with it. We set up the bars at 1DM's cafes and supply machines to cafes, offices and hotels across Chhattisgarh. This is how we'd think about it.",
+      },
+      { type: "h2", text: "Start with cups per day, not brand" },
+      {
+        type: "list",
+        items: [
+          "Up to about 40 drinks a day (small office, home bar, kiosk): a prosumer dual-boiler machine with a good single-dose or on-demand grinder is enough.",
+          "40–150 drinks a day (most new cafes): a two-group commercial machine and two grinders — one for espresso, one for filter or decaf.",
+          "150+ drinks a day, or big morning rushes (busy cafes, hotels): a two- or three-group commercial machine from a brand like La Marzocco, Victoria Arduino or Nuova Simonelli, with commercial grinders that can keep up.",
+        ],
+      },
+      { type: "h2", text: "The grinder matters as much as the machine" },
+      {
+        type: "p",
+        text: "A great espresso machine with a poor grinder makes poor espresso. Budget for a commercial on-demand grinder — Mahlkönig, Eureka or similar — and a second grinder if you serve filter coffee or decaf. Flat burrs of 64 mm and up give the consistency a busy bar needs.",
+      },
+      { type: "h2", text: "What to check before you buy" },
+      {
+        type: "list",
+        items: [
+          "Who installs it and dials in your recipe — and who will service it in your city. In Chhattisgarh this is often the deciding factor.",
+          "Water: hard water destroys boilers. Plan a water filter or softener from day one.",
+          "Power and plumbing: commercial machines need the right electrical supply and, ideally, a direct water line and drain.",
+          "Spare parts and warranty: buy from an authorised dealer so warranty and genuine parts are covered.",
+          "Training: your baristas need to know how to dial in, steam milk and clean the machine daily.",
+        ],
+      },
+      { type: "h2", text: "Buy, rent or lease?" },
+      {
+        type: "p",
+        text: "Buy if you know your volume, have capital set aside and have a technician you trust. Rent if you're new, if your volume is uncertain, or if you'd rather keep cash for fit-out and stock — you can buy later once the business is steady. For homes and small offices, renting is the easiest way to find out whether you'll really use an espresso machine before spending lakhs on one.",
+      },
+      { type: "h2", text: "Buying or renting in Chhattisgarh" },
+      {
+        type: "p",
+        text: "We stock espresso machines and commercial grinders in Raipur, rent them monthly, and order premium machines from La Marzocco, Victoria Arduino, Nuova Simonelli and others through our Brewing Gadgets dealership — with installation, recipe set-up and barista training across Raipur, Bhilai and Bilaspur.",
+      },
+      {
+        type: "links",
+        items: [
+          { href: "/espresso-machines-chhattisgarh", label: "Espresso & commercial coffee machines in Chhattisgarh" },
+          { href: "/coffee-machine-rental", label: "Coffee machines on rent" },
+          { href: "/brewing-gadgets-dealer-chhattisgarh", label: "Authorised Brewing Gadgets dealer in Chhattisgarh" },
+        ],
+      },
+    ],
+  },
+  {
     slug: "coffee-machine-on-rent-raipur",
     title: "Coffee Machine on Rent in Raipur: What It Costs and Which One to Pick",
     dek: "Renting an espresso machine, grinder or brewer before you buy one makes a lot of sense. Here's what renting costs in Raipur, which machine suits a home, office or cafe, and what to check before you sign up.",

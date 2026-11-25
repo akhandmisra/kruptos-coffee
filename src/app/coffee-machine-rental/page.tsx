@@ -162,7 +162,11 @@ export default async function CoffeeMachineRentalPage() {
           <a href="https://www.1dm.coffee/club" className="text-crema underline">
             1DM Elite Club
           </a>{" "}
-          membership.
+          membership. Looking to buy a high-end or commercial machine instead? See{" "}
+          <Link href="/espresso-machines-chhattisgarh" className="text-crema underline">
+            espresso machines in Chhattisgarh
+          </Link>
+          .
         </p>
       </section>
 

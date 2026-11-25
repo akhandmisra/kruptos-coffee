@@ -34,7 +34,7 @@ const brands: { name: string; what: string; href: string }[] = [
 ];
 
 const categories = [
-  { t: "Espresso machines", d: "Home and small-cafe espresso machines, installed and dialled in with fresh coffee." },
+  { t: "Espresso machines", d: "Home and commercial espresso machines — Meraki in stock; La Marzocco, Victoria Arduino and Nuova Simonelli to order — installed and dialled in with fresh coffee." },
   { t: "Coffee grinders", d: "Electric grinders for espresso and filter from Mahlkönig, Fellow, Baratza and DF64, and hand grinders from Comandante and Timemore." },
   { t: "Pour-over & brewers", d: "Hario V60, Origami, UFO and Omni drippers, AeroPress, French presses and the xBloom automated brewer." },
   { t: "Cold brew", d: "Hario cold drip towers, Mizudashi pots and filter-in bottles for cafes and homes." },
@@ -176,6 +176,14 @@ export default async function EquipmentSupplierPage() {
           </div>
         ))}
       </section>
+
+      <p className="mt-8 font-sans text-sm text-bone-dim">
+        Looking for a high-end or commercial espresso machine?{" "}
+        <Link href="/espresso-machines-chhattisgarh" className="text-crema underline">
+          See espresso &amp; commercial coffee machines in Chhattisgarh
+        </Link>
+        .
+      </p>
 
       <section className="mt-20 max-w-3xl">
         <h2 className="font-display text-4xl text-bone">For cafes, restaurants &amp; offices</h2>

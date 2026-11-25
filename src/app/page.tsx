@@ -128,6 +128,9 @@ export default async function HomePage() {
                 out what you like.{" "}
                 <Link href="/coffee-machine-rental" className="text-crema underline">
                   Coffee machines on rent in Raipur →
+                </Link>{" "}
+                <Link href="/espresso-machines-chhattisgarh" className="text-crema underline">
+                  Espresso machines →
                 </Link>
               </p>
             </div>
