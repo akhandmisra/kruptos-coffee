@@ -15,12 +15,12 @@ import { CartDrawer } from "@/components/cart-drawer";
 import { siteUrl, siteName, defaultOgImage, organizationSchema } from "@/lib/site";
 
 const description =
-  "Kruptos Coffee Roasters — Chhattisgarh's first specialty coffee roastery. Buy fresh small-batch specialty coffee beans online in India, coffee grown in Bastar, brewing equipment to buy or rent, and wholesale beans for cafes.";
+  "Kruptos Coffee Roasters — Chhattisgarh's first specialty coffee roastery. Fresh small-batch specialty coffee beans roasted to order in Raipur, custom roast profiles and private label for cafes, coffee grown in Bastar, brewing equipment to buy or rent, and wholesale beans for cafes.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Kruptos Coffee Roasters | Specialty Coffee Beans Online — Raipur, Chhattisgarh",
+    default: "Kruptos Coffee Roasters | Coffee Roaster in Raipur — Fresh Specialty Coffee Beans, Chhattisgarh",
     template: "%s | Kruptos Coffee Roasters",
   },
   description,
