@@ -93,7 +93,11 @@ export default function WholesalePage() {
             </div>
           ))}
           <p className="font-sans text-sm text-bone-dim">
-            See the{" "}
+            Want your own roast profile, house blend or private label? See{" "}
+            <Link href="/custom-coffee-roasting" className="text-crema underline">
+              custom roasting for cafes
+            </Link>
+            . See the{" "}
             <Link href="/shop?category=coffee" className="text-crema underline">
               current roasts
             </Link>{" "}

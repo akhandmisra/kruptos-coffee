@@ -7,7 +7,7 @@ import { contact, siteUrl } from "@/lib/site";
 export const revalidate = 3600;
 
 export const metadata = {
-  title: "Buy Coffee Beans Online in Raipur & Chhattisgarh — Fresh Roasted Specialty Coffee",
+  title: "Coffee Beans in Raipur — Freshly Roasted by Kruptos, Chhattisgarh's Specialty Roastery",
   description:
     "Buy fresh-roasted specialty coffee beans in Raipur, Bhilai, Bilaspur and across Chhattisgarh from Kruptos Coffee Roasters — the state's first specialty roastery. Whole bean or ground, roast date on every bag, delivered across India.",
   alternates: { canonical: "/coffee-beans-raipur" },
@@ -164,7 +164,11 @@ export default async function CoffeeBeansPage() {
 
       <section className="mt-20 max-w-3xl">
         <p className="font-sans text-sm text-bone-dim">
-          Buying for a cafe, hotel or office? See{" "}
+          Run a cafe? We roast to order and build{" "}
+          <Link href="/custom-coffee-roasting" className="text-crema underline">
+            custom roast profiles, house blends and private-label coffee
+          </Link>
+          . Buying for a hotel or office? See{" "}
           <Link href="/wholesale" className="text-crema underline">
             wholesale coffee beans
           </Link>
