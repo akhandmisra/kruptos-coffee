@@ -23,7 +23,7 @@ export function organizationSchema() {
     url: siteUrl,
     logo: `${siteUrl}/apple-icon.png`,
     description:
-      "Specialty coffee roastery from Chhattisgarh, India. Small-batch roasts with full traceability, coffee grown in Bastar, brewing equipment to buy or rent, and wholesale beans for cafes, hotels and offices.",
+      "Specialty coffee roastery from Chhattisgarh, India. Small-batch roasts with full traceability, coffee grown in Bastar, coffee machines, grinders and brewing equipment supplied to buy or rent (Hario, Timemore, Fellow, Comandante, Mahlkönig, Baratza and more), and wholesale beans for cafes, hotels and offices.",
     areaServed: "IN",
     address: { "@type": "PostalAddress", addressRegion: "Chhattisgarh", addressCountry: "IN" },
     contactPoint: {

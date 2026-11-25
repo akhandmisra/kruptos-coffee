@@ -59,6 +59,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/coffee-equipment-supplier" className="hover:text-bone">
+                  Coffee equipment supplier
+                </Link>
+              </li>
+              <li>
                 <Link href="/coffee-machine-rental" className="hover:text-bone">
                   Coffee machine on rent
                 </Link>

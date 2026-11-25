@@ -5,7 +5,7 @@ import { useCart } from "@/context/cart-context";
 
 const NAV_LINKS = [
   { href: "/shop", label: "Shop" },
-  { href: "/shop?category=equipment", label: "Equipment" },
+  { href: "/coffee-equipment-supplier", label: "Equipment" },
   { href: "/coffee-machine-rental", label: "Rent a Machine" },
   { href: "/wholesale", label: "Wholesale" },
   { href: "/journal", label: "Journal" },

@@ -132,7 +132,7 @@ export default async function HomePage() {
               </p>
             </div>
             <Link
-              href="/shop?category=equipment"
+              href="/coffee-equipment-supplier"
               className="hidden font-mono text-xs uppercase tracking-[0.2em] text-bone-dim hover:text-crema sm:block"
             >
               View all →
