@@ -18,6 +18,76 @@ export type JournalArticle = {
 
 export const journalArticles: JournalArticle[] = [
   {
+    slug: "best-home-coffee-setup-india-every-budget",
+    title: "Which Coffee Equipment Should You Buy? A Home Setup for Every Budget in India",
+    dek: "From a ₹10,000 pour-over kit to a full home espresso bar — what to buy first, what to skip, and when it's smarter to rent. From the roasters who supply and set up coffee bars across Chhattisgarh.",
+    readTime: "7 min read",
+    publishedAt: "2026-11-25",
+    body: [
+      {
+        type: "p",
+        text: "The question we hear most at the roastery isn't about coffee — it's 'which machine should I buy?' The honest answer is that the grinder matters more than the brewer, fresh beans matter more than both, and most people should start smaller than they think. Here's how we'd spend the money at each level.",
+      },
+      { type: "h2", text: "Start here: around ₹10,000–15,000" },
+      {
+        type: "list",
+        items: [
+          "A hand grinder such as the Timemore Chestnut C3S — the single biggest upgrade from pre-ground coffee.",
+          "A brewer: Hario V60, AeroPress or a French press.",
+          "A 0.1 g scale and any kettle you can pour slowly from.",
+          "Freshly roasted beans with a roast date on the bag.",
+        ],
+      },
+      {
+        type: "p",
+        text: "This makes better black coffee than most cafes, and teaches you what you like before you spend more.",
+      },
+      { type: "h2", text: "Serious pour-over: around ₹30,000–70,000" },
+      {
+        type: "list",
+        items: [
+          "A premium grinder — Comandante MK4 by hand, or an electric filter grinder like the Fellow Ode Gen 2.",
+          "A temperature-controlled gooseneck kettle (Timemore Fish, Brewista).",
+          "A couple of drippers to play with — V60, Origami, a flat-bottom dripper.",
+        ],
+      },
+      { type: "h2", text: "Home espresso: from around ₹70,000 to ₹3,00,000+" },
+      {
+        type: "list",
+        items: [
+          "An espresso-capable grinder first — Baratza Encore ESP to start, DF64 or Mahlkönig for single-dosing at a higher level.",
+          "Then the machine. A dual-boiler machine with a 58 mm portafilter (like the Meraki) lets you pull shots and steam milk at the same time.",
+          "Milk pitcher, tamper, distribution tool, knock box and a scale that fits under the portafilter.",
+        ],
+      },
+      {
+        type: "p",
+        text: "If you mostly drink lattes and cappuccinos every day, espresso is worth it. If you mostly drink black coffee, a great filter setup costs a fraction and tastes better.",
+      },
+      { type: "h2", text: "For offices and cafes" },
+      {
+        type: "p",
+        text: "Size by cups per day: a home-class espresso setup handles up to about 20–40 drinks a day; beyond that you want a commercial machine and grinder. Our cafe buyer's guide goes through this in detail.",
+      },
+      { type: "h2", text: "Not sure? Rent first" },
+      {
+        type: "p",
+        text: "We rent most of this equipment monthly in Raipur, Bhilai and Bilaspur, so you can live with a grinder or espresso machine before spending lakhs — and buy it later if it earns its place. Whatever you choose, use fresh coffee: we roast to order, whole bean or ground.",
+      },
+      {
+        type: "links",
+        items: [
+          { href: "/coffee-equipment-supplier", label: "Coffee equipment we supply" },
+          { href: "/espresso-machines-chhattisgarh", label: "Espresso machines — buy or rent" },
+          { href: "/coffee-machine-rental", label: "Coffee machines on rent" },
+          { href: "/journal/how-to-choose-a-coffee-grinder-india", label: "How to choose a coffee grinder in India" },
+          { href: "/journal/espresso-machine-for-cafe-india-buyers-guide", label: "Choosing an espresso machine for a cafe" },
+          { href: "/coffee-beans-raipur", label: "Fresh coffee beans" },
+        ],
+      },
+    ],
+  },
+  {
     slug: "espresso-machine-for-cafe-india-buyers-guide",
     title: "Choosing an Espresso Machine for a Cafe in India: Buy, Rent or Lease?",
     dek: "What to look for in a commercial espresso machine and grinder, how many groups you actually need, and when renting makes more sense than buying — from a roaster that sets up cafe bars in Chhattisgarh.",

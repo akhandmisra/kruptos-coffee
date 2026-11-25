@@ -158,9 +158,14 @@ export default function CustomRoastingPage() {
               espresso machines
             </Link>{" "}
             and{" "}
-            <a href="https://www.1dm.coffee/franchise" className="text-crema underline">
-              cafe consulting with 1DM
-            </a>
+            <a href="https://www.1dm.coffee/cafe-consulting" className="text-crema underline">
+              cafe consulting
+            </a>{" "}
+            and{" "}
+            <a href="https://www.1dm.coffee/barista-training" className="text-crema underline">
+              barista training
+            </a>{" "}
+            with 1DM
             .
           </p>
         </div>

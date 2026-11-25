@@ -218,7 +218,11 @@ export default async function EquipmentSupplierPage() {
             .
           </p>
           <p className="mt-4 font-sans text-sm text-bone-dim">
-            Choosing a grinder? Read{" "}
+            Not sure what to buy? Read{" "}
+            <Link href="/journal/best-home-coffee-setup-india-every-budget" className="text-crema underline">
+              which coffee equipment to buy at every budget
+            </Link>
+            . Choosing a grinder? Read{" "}
             <Link href="/journal/how-to-choose-a-coffee-grinder-india" className="text-crema underline">
               how to choose a coffee grinder in India
             </Link>
