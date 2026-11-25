@@ -3,6 +3,9 @@
 
 export const siteUrl = "https://kruptoscoffee.com";
 export const siteName = "Kruptos Coffee Roasters";
+// Brewing Gadgets — Kruptos is their authorised dealer in Chhattisgarh.
+export const BREWING_GADGETS_URL = "https://www.brewinggadgets.com";
+
 export const defaultOgImage = "/images/estate-banner.jpg";
 
 export const contact = {
@@ -23,7 +26,7 @@ export function organizationSchema() {
     url: siteUrl,
     logo: `${siteUrl}/apple-icon.png`,
     description:
-      "Specialty coffee roastery from Chhattisgarh, India. Small-batch roasts with full traceability, coffee grown in Bastar, coffee machines, grinders and brewing equipment supplied to buy or rent (Hario, Timemore, Fellow, Comandante, Mahlkönig, Baratza and more), and wholesale beans for cafes, hotels and offices.",
+      "Specialty coffee roastery from Chhattisgarh, India. Small-batch roasts with full traceability, coffee grown in Bastar, coffee machines, grinders and brewing equipment supplied to buy or rent (Hario, Timemore, Fellow, Comandante, Mahlkönig, Baratza and more; authorised Brewing Gadgets dealer in Chhattisgarh), and wholesale beans for cafes, hotels and offices.",
     areaServed: "IN",
     address: { "@type": "PostalAddress", addressRegion: "Chhattisgarh", addressCountry: "IN" },
     contactPoint: {

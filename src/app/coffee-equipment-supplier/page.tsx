@@ -3,14 +3,14 @@ import { getAllProducts } from "@/lib/products";
 import type { Product } from "@/lib/products/types";
 import { ProductGrid } from "@/components/product-grid";
 import { LeadForm } from "@/components/lead-form";
-import { contact, siteUrl } from "@/lib/site";
+import { BREWING_GADGETS_URL, contact, siteUrl } from "@/lib/site";
 
 export const revalidate = 3600;
 
 export const metadata = {
-  title: "Coffee Machine & Brewing Equipment Supplier in Raipur, Chhattisgarh",
+  title: "Coffee Machine & Brewing Equipment Supplier in Raipur — Authorised Brewing Gadgets Dealer, Chhattisgarh",
   description:
-    "Kruptos Coffee Roasters supplies coffee machines, grinders and brewing equipment in Raipur, Bhilai, Bilaspur and across India — Hario, Timemore, Fellow, Comandante, Mahlkönig, Baratza, AeroPress and more, for cafes, offices and home brewers. Buy, rent or order wholesale.",
+    "Authorised Brewing Gadgets dealer in Chhattisgarh. Kruptos Coffee Roasters supplies coffee machines, grinders and brewing equipment in Raipur, Bhilai, Bilaspur and across India — Hario, Timemore, Fellow, Comandante, Mahlkönig, Baratza, AeroPress and more, for cafes, offices and home brewers. Buy, rent or order wholesale.",
   alternates: { canonical: "/coffee-equipment-supplier" },
 };
 
@@ -52,6 +52,10 @@ const interests = [
 
 const faqs = [
   {
+    q: "Who is the authorised Brewing Gadgets dealer in Chhattisgarh?",
+    a: "Kruptos Coffee Roasters (part of 1DM) is the authorised Brewing Gadgets dealer in Chhattisgarh. Buy the Brewing Gadgets range locally from us in Raipur, Bhilai and Bilaspur, with setup and support.",
+  },
+  {
     q: "Where can I buy coffee brewing equipment in Raipur?",
     a: "Kruptos Coffee Roasters supplies espresso machines, coffee grinders, pour-over drippers, kettles, scales and filters in Raipur, Bhilai and Bilaspur, and ships across India. Order online or WhatsApp +91 9179241042.",
   },
@@ -90,7 +94,7 @@ export default async function EquipmentSupplierPage() {
     "@context": "https://schema.org",
     "@type": "Service",
     name: "Coffee machine and brewing equipment supply",
-    alternateName: ["Coffee machine supplier", "Coffee equipment supplier", "Coffee brewing equipment distributor"],
+    alternateName: ["Authorised Brewing Gadgets dealer in Chhattisgarh", "Coffee machine supplier", "Coffee equipment supplier", "Coffee brewing equipment distributor"],
     serviceType: "Coffee machine, grinder and brewing equipment supplier",
     description: metadata.description,
     provider: { "@id": `${siteUrl}/#organization` },
@@ -133,6 +137,24 @@ export default async function EquipmentSupplierPage() {
           Get a quote
         </a>
       </div>
+
+      <section className="mt-14 rounded-sm border border-crema/40 bg-ink-raised p-6 sm:p-8">
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-crema">Authorised dealer</p>
+        <h2 className="mt-2 font-display text-3xl text-bone sm:text-4xl">
+          Authorised Brewing Gadgets dealer in Chhattisgarh
+        </h2>
+        <p className="mt-3 max-w-2xl font-sans text-sm leading-relaxed text-bone-dim">
+          Kruptos is the authorised dealer for{" "}
+          <a href={BREWING_GADGETS_URL} target="_blank" rel="noopener" className="text-crema underline">
+            Brewing Gadgets
+          </a>{" "}
+          in Chhattisgarh — so you can buy their range of grinders, brewers, kettles and accessories locally, with setup,
+          advice and after-sales support from us in Raipur, Bhilai and Bilaspur.
+        </p>
+        <Link href="/brewing-gadgets-dealer-chhattisgarh" className="mt-4 inline-block font-mono text-xs uppercase tracking-[0.2em] text-crema">
+          About our Brewing Gadgets dealership →
+        </Link>
+      </section>
 
       <section className="mt-20">
         <h2 className="font-display text-4xl text-bone">Brands we supply</h2>

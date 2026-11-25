@@ -6,7 +6,7 @@ import { siteUrl } from "@/lib/site";
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticRoutes = ["", "/shop", "/wholesale", "/coffee-machine-rental", "/coffee-equipment-supplier", "/coffee-beans-raipur", "/journal", "/about", "/contact"].map((path) => ({
+  const staticRoutes = ["", "/shop", "/wholesale", "/coffee-machine-rental", "/coffee-equipment-supplier", "/coffee-beans-raipur", "/brewing-gadgets-dealer-chhattisgarh", "/journal", "/about", "/contact"].map((path) => ({
     url: `${siteUrl}${path}`,
     lastModified: new Date(),
   }));
