@@ -73,6 +73,24 @@ export default async function ProductPage({
         ]
       : [];
 
+  // Merchant-listing friendly: a single Offer at the lowest "Buy" price (rent
+  // variants are monthly prices, not purchase prices), and the real maker as
+  // brand for equipment.
+  const buyVariants = product.variants.filter(
+    (v) => !v.selectedOptions.some((o) => o.name === "Type" && o.value === "Rent")
+  );
+  const priced = (buyVariants.length ? buyVariants : product.variants)
+    .slice()
+    .sort((a, b) => Number(a.price.amount) - Number(b.price.amount));
+  const lowest = priced[0];
+  const EQUIPMENT_BRANDS = [
+    "Hario", "Timemore", "Fellow", "Comandante", "Mahlkönig", "Baratza", "DF64", "Meraki", "xBloom",
+    "AeroPress", "Aeropress", "Brewista", "Flair", "Origami", "UFO", "Chemex", "Kalita", "Sibarist", "Subminimal", "Omni",
+  ];
+  const equipmentBrand = EQUIPMENT_BRANDS.find((b) => product.title.toLowerCase().includes(b.toLowerCase()));
+  const brandName =
+    product.category === "coffee" ? "Kruptos Coffee Roasters" : equipmentBrand ?? "Kruptos Coffee Roasters";
+
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -80,14 +98,14 @@ export default async function ProductPage({
     description: product.description || product.tagline,
     url: `${siteUrl}/products/${product.handle}`,
     image: product.image ? [product.image.url] : [`${siteUrl}/images/estate-banner.jpg`],
-    brand: { "@type": "Brand", name: "Kruptos Coffee Roasters" },
+    brand: { "@type": "Brand", name: brandName },
     category: product.category === "coffee" ? "Coffee beans" : product.category === "equipment" ? "Coffee equipment" : "Merchandise",
     offers: {
-      "@type": "AggregateOffer",
-      priceCurrency: product.priceRange.minVariantPrice.currencyCode,
-      lowPrice: product.priceRange.minVariantPrice.amount,
-      highPrice: product.priceRange.maxVariantPrice.amount,
-      offerCount: product.variants.length,
+      "@type": "Offer",
+      url: `${siteUrl}/products/${product.handle}`,
+      priceCurrency: (lowest ?? { price: product.priceRange.minVariantPrice }).price.currencyCode,
+      price: (lowest ?? { price: product.priceRange.minVariantPrice }).price.amount,
+      itemCondition: "https://schema.org/NewCondition",
       availability: product.variants.some((v) => v.availableForSale)
         ? "https://schema.org/InStock"
         : "https://schema.org/OutOfStock",
